@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday, Lisan 🧸</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sky:#8ecbef;
+    --sky-deep:#5fb3e0;
+    --ink:#20232e;
+    --ink-soft:#3a3f52;
+    --cream:#fdfdfb;
+    --paw:#c7dff0;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Quicksand', sans-serif;
+    overflow-x:hidden;
+  }
+  h1,h2,.display{ font-family:'Fredoka', sans-serif; }
+
+  /* paw print trail background */
+  .paw-bg{
+    position:fixed; inset:0; z-index:0; pointer-events:none; opacity:.35;
+  }
+  .paw{
+    position:absolute; font-size:1.4rem; color:var(--paw);
+    transform:rotate(var(--r,0deg));
+  }
+
+  section{
+    position:relative; z-index:1;
+    min-height:100vh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; padding:7vh 6vw;
+  }
+
+  .eyebrow{
+    letter-spacing:.3em; text-transform:uppercase; font-size:.7rem;
+    color:var(--sky-deep); margin-bottom:1.1rem; font-weight:600;
+  }
+  h1{
+    font-weight:700;
+    font-size:clamp(2.2rem, 8vw, 4.6rem);
+    line-height:1.08;
+    color:var(--ink);
+  }
+  h1 .accent{ color:var(--sky-deep); }
+  .sub{
+    margin-top:1.2rem; font-size:1.05rem; color:var(--ink-soft); max-width:34ch;
+    font-weight:500;
+  }
+
+  /* ---- BEAR ---- */
+  .bear{
+    width:150px; height:150px; position:relative; margin:2.8rem auto 0;
+    animation:sway 4s ease-in-out infinite;
+  }
+  @keyframes sway{ 0%,100%{transform:rotate(-3deg);} 50%{transform:rotate(3deg);} }
+  .bear .ear{ position:absolute; width:42px; height:42px; background:var(--ink); border-radius:50%; top:-14px; }
+  .bear .ear.l{ left:2px; } .bear .ear.r{ right:2px; }
+  .bear .ear::after{ content:''; position:absolute; width:20px; height:20px; background:var(--sky); border-radius:50%; top:11px; left:11px; }
+  .bear .head{ position:absolute; width:150px; height:140px; background:var(--ink); border-radius:50% 50% 46% 46%; top:18px; }
+  .bear .patch{ position:absolute; width:96px; height:86px; background:var(--cream); border-radius:50%; left:27px; top:52px; }
+  .bear .eye{ position:absolute; width:9px; height:9px; background:var(--ink); border-radius:50%; top:20px; }
+  .bear .eye.l{ left:20px; } .bear .eye.r{ right:20px; }
+  .bear .nose{ position:absolute; width:20px; height:15px; background:var(--ink); border-radius:50%; left:38px; top:34px; }
+  .bear .mouth{ position:absolute; width:26px; height:12px; border:3px solid var(--ink); border-top:none; border-radius:0 0 20px 20px; left:35px; top:47px; }
+  .bear .bow{ position:absolute; width:30px; height:18px; left:60px; top:98px; }
+  .bear .bow::before, .bear .bow::after{ content:''; position:absolute; width:14px; height:14px; background:var(--sky-deep); top:0; }
+  .bear .bow::before{ left:0; clip-path:polygon(100% 0,0 50%,100% 100%); }
+  .bear .bow::after{ right:0; clip-path:polygon(0 0,100% 50%,0 100%); }
+
+  .hint{ margin-top:2rem; font-size:.85rem; color:var(--sky-deep); font-weight:600; opacity:.9; }
+
+  /* ---- age badge ---- */
+  .age-badge{
+    margin-top:1.6rem; display:inline-flex; align-items:baseline; gap:.4rem;
+    background:var(--ink); color:var(--cream); padding:.7rem 1.6rem; border-radius:100px;
+  }
+  .age-badge .num{ font-family:'Fredoka'; font-size:1.6rem; color:var(--sky); }
+  .age-badge .txt{ font-size:.8rem; letter-spacing:.05em; }
+
+  /* ---- letter ---- */
+  .letter{
+    max-width:640px; text-align:left; background:#fff;
+    border:2px solid var(--paw); border-radius:24px; padding:clamp(1.8rem,5vw,3.2rem);
+    box-shadow:0 20px 50px -20px rgba(95,179,224,.35);
+  }
+  .letter p{ font-size:1.05rem; line-height:1.85; margin-bottom:1.05rem; font-weight:500; color:var(--ink-soft); }
+  .letter p:first-child{ font-family:'Fredoka'; font-size:1.3rem; color:var(--sky-deep); margin-bottom:1.4rem; font-weight:600; }
+  .signature{ margin-top:1.4rem; font-family:'Fredoka'; color:var(--ink); font-size:1.1rem; font-weight:600; }
+
+  /* ---- polaroids ---- */
+  .gallery{ display:flex; flex-wrap:wrap; gap:1.6rem; justify-content:center; margin-top:3rem; }
+  .polaroid{
+    background:#fff; padding:.9rem .9rem 2.6rem; border-radius:6px;
+    box-shadow:0 14px 30px -12px rgba(32,35,46,.25);
+    width:210px; transform:rotate(var(--rot));
+    transition:transform .35s;
+  }
+  .polaroid:nth-child(1){ --rot:-6deg; }
+  .polaroid:nth-child(2){ --rot:5deg; }
+  .polaroid:hover{ transform:rotate(0deg) scale(1.04); }
+  .polaroid img{ width:100%; display:block; border-radius:2px; }
+  .polaroid .cap{ text-align:center; font-family:'Fredoka'; font-size:.85rem; color:var(--sky-deep); margin-top:.7rem; }
+
+  /* ---- song ---- */
+  .vinyl-wrap{ display:flex; align-items:center; gap:1.4rem; margin-top:1rem; background:#fff; border:2px solid var(--paw); border-radius:100px; padding:.7rem 1.5rem .7rem .7rem; }
+  .vinyl{ width:64px; height:64px; border-radius:50%; background:repeating-radial-gradient(circle, var(--ink) 0 2px, #2f3345 2px 4px); position:relative; animation:spin 6s linear infinite; flex-shrink:0; }
+  .vinyl::after{ content:''; position:absolute; inset:26px; background:var(--sky); border-radius:50%; }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+  .song-info{ text-align:left; }
+  .song-title{ font-family:'Fredoka'; font-weight:600; font-size:.95rem; color:var(--ink); }
+  .song-artist{ font-size:.8rem; color:var(--ink-soft); }
+
+  /* ---- reasons ---- */
+  .reasons{ display:grid; gap:1.1rem; max-width:780px; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); margin-top:2.6rem; }
+  .reason-card{
+    background:#fff; border:2px solid var(--paw);
+    border-radius:16px; padding:1.5rem 1.3rem; text-align:left;
+    transition:transform .3s, border-color .3s;
+  }
+  .reason-card:hover{ transform:translateY(-6px); border-color:var(--sky-deep); }
+  .reason-emoji{ font-size:1.3rem; }
+  .reason-text{ margin-top:.6rem; font-size:.92rem; font-weight:500; line-height:1.6; color:var(--ink-soft); }
+
+  footer{ min-height:38vh; }
+  footer .paw-big{ font-size:2.2rem; animation:beat 1.6s ease-in-out infinite; }
+  @keyframes beat{ 0%,100%{transform:scale(1);} 50%{transform:scale(1.15);} }
+  footer p{ margin-top:1rem; font-size:.85rem; color:var(--sky-deep); letter-spacing:.06em; font-weight:600; }
+
+  #confetti{ position:fixed; inset:0; pointer-events:none; z-index:5; }
+
+  @media (prefers-reduced-motion: reduce){
+    .bear, footer .paw-big, .vinyl{ animation:none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="paw-bg" id="pawBg"></div>
+<canvas id="confetti"></canvas>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="eyebrow">Selamat ulang tahun</div>
+  <h1>Lisanan Sidqin<br><span class="accent">Aliyah</span> 🧸</h1>
+  <p class="sub">Hari ini giliran dunia yang merayakan kamu, Aliyah.</p>
+
+  <div class="age-badge"><span class="num">18</span><span class="txt">TAHUN</span></div>
+
+  <div class="bear" id="bear">
+    <div class="ear l"></div><div class="ear r"></div>
+    <div class="head"></div>
+    <div class="eye l"></div><div class="eye r"></div>
+    <div class="nose"></div>
+    <div class="mouth"></div>
+    <div class="patch"></div>
+    <div class="bow"></div>
+  </div>
+  <div class="hint">peluk beruangnya dulu, yuk 🤍</div>
+</section>
+
+<!-- SURAT -->
+<section id="letter">
+  <div class="letter">
+    <p>Untuk Aliyah,</p>
+    <p>Delapan belas tahun kamu hari ini — dan rasanya baru kemarin aku belajar caramu tertawa, caramu ngambek lucu, caramu peduli sama semua orang di sekitarmu.</p>
+    <p>Makasih ya udah jadi kamu: hangat, sedikit gemas, dan selalu bikin hari-hariku terasa lebih ringan.</p>
+    <p>Semoga umur baru ini isinya cuma hal-hal baik: mimpi yang pelan-pelan kewujud, orang-orang yang sayang tulus, dan lebih banyak alasan buat senyum.</p>
+    <div class="signature">— selalu ada buat kamu 🧸</div>
+  </div>
+
+  <div class="vinyl-wrap">
+    <div class="vinyl"></div>
+    <div class="song-info">
+      <div class="song-title">Somebody's Pleasure</div>
+      <div class="song-artist">Aziz Hedra — lagu spesial hari ini</div>
+    </div>
+  </div>
+</section>
+
+<!-- GALERI -->
+<section id="gallery-section">
+  <div class="eyebrow">Kamu, dalam frame</div>
+  <h1 style="font-size:clamp(1.7rem,5vw,2.4rem);">Momen favoritku</h1>
+  <div class="gallery">
+    <div class="polaroid"><img src="12068.jpg" alt="Aliyah"><div class="cap">selalu cantik 🤍</div></div>
+    <div class="polaroid"><img src="12067.jpg" alt="Aliyah"><div class="cap">my favorite face</div></div>
+  </div>
+</section>
+
+<!-- ALASAN -->
+<section id="reasons-section">
+  <div class="eyebrow">Beberapa alasan</div>
+  <h1 style="font-size:clamp(1.7rem,5vw,2.4rem);">Kenapa Lisan spesial</h1>
+  <div class="reasons">
+    <div class="reason-card"><br><div class="reason-emoji">🐾</div><div class="reason-text">Caramu peduli ke Aku, bahkan pas kamu sendiri capek.</div></div>
+  </div>
+    <div class="reasons"><div class="reason-card"><div class="reason-emoji">🐾</div><div class="reason-text">Ketawa kamu tuh entah kenapa selalu bembuat ku tenang.</div></div></div>
+      <div class="reasons"><div class="reason-card"><div class="reason-emoji">🐾</div><div class="reason-text">Kamu akan terus tumbuh jadi lebih baik, tanpa kehilangan diri kamu yang asli.</div></div></div>
+        <div class="reasons"></div>
+        <div class="reasons"><div class="reason-card"><br><br><div class="reason-emoji">🐾</div><div class="reason-text">Rasanya nyaman yang selalu aku rasakan tiap kali ada kamu.</div></div></div>
+</section>
+
+<footer>
+  <div class="paw-big">🐾🤍</div>
+  <p>_SELAMAT ULANG TAHUN, ALIYAH — 18 TAHUN_</p>
+</footer>
+
+<script>
+// paw print trail
+const pawBg = document.getElementById('pawBg');
+const paws = ['🐾'];
+for(let i=0;i<26;i++){
+  const p = document.createElement('div');
+  p.className='paw'; p.textContent='🐾';
+  p.style.top = Math.random()*100+'vh';
+  p.style.left = Math.random()*100+'vw';
+  p.style.setProperty('--r', (Math.random()*60-30)+'deg');
+  p.style.fontSize = (Math.random()*10+14)+'px';
+  pawBg.appendChild(p);
+}
+
+// bear hug -> confetti
+const bear = document.getElementById('bear');
+const hint = document.querySelector('.hint');
+let hugged = false;
+bear.addEventListener('click', ()=>{
+  if(hugged) return;
+  hugged = true;
+  bear.style.animation = 'none';
+  bear.style.transform = 'scale(1.15) rotate(0deg)';
+  hint.textContent = 'makasih pelukannya 🤍';
+  launchConfetti();
+});
+
+const canvas = document.getElementById('confetti');
+const ctx = canvas.getContext('2d');
+function resize(){ canvas.width = innerWidth; canvas.height = innerHeight; }
+resize(); addEventListener('resize', resize);
+
+function launchConfetti(){
+  const colors = ['#8ecbef','#5fb3e0','#20232e','#fdfdfb'];
+  const rect = bear.getBoundingClientRect();
+  const originX = rect.left + rect.width/2;
+  const originY = rect.top + rect.height/2;
+  const particles = Array.from({length:110}, ()=>({
+    x: originX + (Math.random()-.5)*100,
+    y: originY,
+    vx: (Math.random()-.5)*8,
+    vy: Math.random()*-8-2,
+    size: Math.random()*6+3,
+    color: colors[Math.floor(Math.random()*colors.length)],
+    rot: Math.random()*360,
+    vr: (Math.random()-.5)*10,
+    life: 100
+  }));
+  let frame=0;
+  function tick(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    let alive=false;
+    particles.forEach(p=>{
+      if(p.life<=0) return;
+      alive=true;
+      p.vy += 0.25;
+      p.x += p.vx; p.y += p.vy; p.rot += p.vr; p.life--;
+      ctx.save();
+      ctx.translate(p.x,p.y);
+      ctx.rotate(p.rot*Math.PI/180);
+      ctx.fillStyle = p.color;
+      ctx.globalAlpha = Math.max(p.life/100,0);
+      ctx.fillRect(-p.size/2,-p.size/2,p.size,p.size*0.6);
+      ctx.restore();
+    });
+    frame++;
+    if(alive && frame<200) requestAnimationFrame(tick);
+    else ctx.clearRect(0,0,canvas.width,canvas.height);
+  }
+  tick();
+}
+</script>
+</body>
+</html>
